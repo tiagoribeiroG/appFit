@@ -5,7 +5,7 @@ export default function SummaryScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Order Summary</Text>
-      {/* Aqui você pode adicionar os detalhes do pedido */}
+      {/* detalhes do pedido */}
     </View>
   );
 }

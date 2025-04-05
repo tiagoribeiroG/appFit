@@ -2,6 +2,7 @@ import { View, ImageBackground, TouchableOpacity, Text } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
 
+
 const HomeScreen = () => {
   return (
     <ImageBackground source={require("../assets/background.png")} style={styles.background}>

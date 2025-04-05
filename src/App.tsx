@@ -1,46 +1,56 @@
+import 'react-native-reanimated';
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./screens/HomeScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import AboutScreen from "./screens/AboutScreen";
+import ContactScreen from "./screens/ContactScreen";
+import ProductsScreen from "./screens/ProductsScreen";
 import { StyleSheet } from "react-native";
+import 'react-native-reanimated';
 
-const Tab = createBottomTabNavigator();
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      <Drawer.Navigator
         screenOptions={({ route }) => ({
-          tabBarStyle: styles.tabBar,
-          tabBarIcon: ({ color, size }) => {
-            let iconName: keyof typeof Ionicons.glyphMap = route.name === "Home" ? "home" : "settings";
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: "#4CAF50",
-          tabBarInactiveTintColor: "#888",
-          tabBarLabelStyle: styles.tabBarLabel,
+          drawerStyle: styles.drawer,
+          drawerActiveTintColor: "#4CAF50",
+          drawerInactiveTintColor: "#888",
           headerShown: false,
+          drawerIcon: ({ color, size }) => {
+            const icons: Record<string, keyof typeof Ionicons.glyphMap> = {
+              Home: "home",
+              Configurações: "settings",
+              Sobre: "information-circle",
+              Contato: "call",
+              Produtos: "cart",
+            };
+          
+            const iconName = icons[route.name] || "help-circle"; // Ícone padrão caso o nome não exista
+            return <Ionicons name={iconName} size={size} color={color} />;
+          }
+          ,
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: "Início" }} />
-        <Tab.Screen name="Configurações" component={SettingsScreen} />
-      </Tab.Navigator>
+        <Drawer.Screen name="Home" component={HomeScreen} options={{ drawerLabel: "Início" }} />
+        <Drawer.Screen name="Configurações" component={SettingsScreen} />
+        <Drawer.Screen name="Sobre" component={AboutScreen} />
+        <Drawer.Screen name="Contato" component={ContactScreen} />
+        <Drawer.Screen name="Produtos" component={ProductsScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  tabBar: {
+  drawer: {
     backgroundColor: "#121212",
-    borderTopColor: "#333",
-    paddingBottom: 5,
-    height: 60,
-  },
-  tabBarLabel: {
-    fontSize: 12,
-    fontWeight: "bold",
-    marginBottom: 5,
+    width: 250,
   },
 });
