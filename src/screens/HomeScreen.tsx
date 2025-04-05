@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 
 const HomeScreen = () => {
   return (
-    <ImageBackground source={require("../assets/background.png")} style={styles.background}>
+    <ImageBackground source={require("../assets/background.webp")} style={styles.background}>
       <View style={styles.container}>
         <TouchableOpacity style={styles.button}>
           <FontAwesome name="whatsapp" size={24} color="white" />
